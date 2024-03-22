@@ -1,10 +1,15 @@
 package com.example.GameCharacterHub.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -27,11 +32,24 @@ public class Player {
         this.lastName = lastName;
         this.email = email;
     }
+    
+    @JsonIgnore
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="player")
+    private List<Character> characters;
+    
 
     //SETTERS AND GETTERS
     
 	public long getPlayerid() {
 		return playerid;
+	}
+
+	public List<Character> getCharacters() {
+		return characters;
+	}
+
+	public void setCharacters(List<Character> characters) {
+		this.characters = characters;
 	}
 
 	public void setPlayerid(long playerid) {

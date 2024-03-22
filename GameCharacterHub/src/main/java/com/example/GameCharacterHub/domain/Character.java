@@ -1,9 +1,13 @@
  package com.example.GameCharacterHub.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
 
 @Entity
 public class Character {
@@ -18,7 +22,7 @@ public class Character {
 	}
 
 	// Constructor
-	public Character(String name, String characterClass, String skill, String equipment, int level, int strength, int agility, int intelligence) {
+	public Character(String name, String characterClass, String skill, String equipment, int level, int strength, int agility, int intelligence, Player player) {
 		this.name = name;
 		this.characterClass = characterClass;
 		this.skill = skill;
@@ -27,13 +31,27 @@ public class Character {
 		this.strength = strength;
 		this.agility = agility;
 		this.intelligence = intelligence;
+		this.player = player;
 	}
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "player")
+	private Player player;
 	
 	
 	//SETTERS AND GETTERS 
 	
+	
 	public long getId() {
 		return id;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	public void setId(long id) {
