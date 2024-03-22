@@ -1,4 +1,4 @@
-package com.example.GameCharacterHub.domain;
+ package com.example.GameCharacterHub.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
